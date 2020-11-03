@@ -66,7 +66,6 @@ Shopping
 
 * Logout
 * Post
-* [fill out your third tab]
 
 **Flow Navigation** (Screen to Screen)
 
