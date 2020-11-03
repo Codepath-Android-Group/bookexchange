@@ -14,11 +14,11 @@ Allows users to post and search for books they'd like to sell, trade, or buy.
 [Evaluation of your app across the following attributes]
 - **Category:** 
 Shopping 
-- **Mobile:**
-- **Story:**
-- **Market:**
-- **Habit:**
-- **Scope:**
+- **Mobile:**  Currently, this application is limited to mobile functionality, but future versions could include a web application.
+- **Story:** Users can post books for sale/trade as well as search and shop for desired books.
+- **Market:** Any user interested in buying, trading, or selling books.
+- **Habit:** Users would use this as often as they needed to buy, sell, or trade books.
+- **Scope:** Allowing users to connect and exchange books.
 
 ## Product Spec
 
