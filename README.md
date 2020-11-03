@@ -12,7 +12,8 @@ Allows users to post and search for books they'd like to sell, trade, or buy.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category:**
+- **Category:** 
+Shopping 
 - **Mobile:**
 - **Story:**
 - **Market:**
