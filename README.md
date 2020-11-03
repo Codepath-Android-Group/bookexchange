@@ -11,7 +11,7 @@
 Allows users to post and search for books they'd like to sell, trade, or buy.
 
 ### App Evaluation
-[Evaluation of your app across the following attributes]
+
 - **Category:** 
 Shopping 
 - **Mobile:**  Currently, this application is limited to mobile functionality, but future versions could include a web application.
@@ -26,39 +26,63 @@ Shopping
 
 **Required Must-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* User should be able to register an account
+* User should be able to login
+* User should see top sellers on search screen (by default) before a query is sent
+* Allow user to search by author, title, genre
+* Login should be persistent
+* User should be able to log out
+* User should be able to post book for sale/trade/buy
+* User should be able to click on any book listing for more detail
+
 
 **Optional Nice-to-have Stories**
 
-* [fill in your required user stories here]
-* ...
+* Filter results by buy/sell/trade
+* Integrate with NYTimes book API (or similar) to mitigate user error
+* Compare against store listing price
+* Users should be able to message seller/buyer to initiate sale
+* User should be able to see previous sales/buys they've done
+* User should be able to rate transactions with others users
 
 ### 2. Screen Archetypes
 
-* [list first screen here]
-   * [list associated required story here]
-   * ...
-* [list second screen here]
-   * [list associated required story here]
-   * ...
+* Login/Register
+   * User should be able to register an account
+   * User should be able to login
+* Search Screen
+   * User should see top sellers on search screen (by default) before a query is sent
+   * Allow user to search by author, title, genre
+* Detailed Screen
+  * User should be able to click on any book listing for more detail
+* Post Book Screen
+  * User should be able to post book for sale/trade/buy
+
+
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* [fill out your first tab]
-* [fill out your second tab]
+* Logout
+* Post
 * [fill out your third tab]
 
 **Flow Navigation** (Screen to Screen)
 
-* [list first screen here]
-   * [list screen navigation here]
-   * ...
-* [list second screen here]
-   * [list screen navigation here]
-   * ...
+* Login
+   * Login (submit)
+   * Register
+* Search Screen
+   * Search
+   * Clicking on an individual listing will lead to Detailed Screen
+* Detailed Screen
+   * Back button (goes back to Search Screen)
+* Post Book Screen
+  * Post (submits new listing to our backend and returns)
+* Confirmation screen
+  * Back (Goes back to search screen-> stetch: display listing history)
+  
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
