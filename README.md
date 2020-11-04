@@ -85,7 +85,7 @@ Shopping
 
 ## Wireframes
 
-<img src="wireframe.png" width=600>
+<img src="wireframe.png">
 
 ## Schema 
 [This section will be completed in Unit 9]
