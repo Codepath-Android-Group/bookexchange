@@ -44,6 +44,8 @@ Shopping
 * Users should be able to message seller/buyer to initiate sale
 * User should be able to see previous sales/buys they've done
 * User should be able to rate transactions with others users
+* User should be able to post book review
+
 
 ### 2. Screen Archetypes
 
@@ -92,8 +94,19 @@ Shopping
 
 Property | Type | Description
 ------------ | ------------- | -------------
-Content from cell 1 | Content from cell 2 | d
-Content in the first column | Content in the second column | d
+objectId | String | Unique identifier
+poster | pointer to user | Book listing author
+image | File | Image of book
+title | String | Title of book
+author | String | Author of book
+genre | String | Genre of book
+ISBN | String | ISBN of book
+synopsis | String | Synopsis of book
+type | String | Type of post (buy/sell/trade)
+dateAdded | DateTime | Date/time book listing was posted
+dateUpdated | DateTime | Date/time book listing was updated
+
+
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
