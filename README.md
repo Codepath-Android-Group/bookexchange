@@ -88,9 +88,12 @@ Shopping
 <img src="wireframe.png">
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+
+Property | Type | Description
+------------ | ------------- | -------------
+Content from cell 1 | Content from cell 2 | d
+Content in the first column | Content in the second column | d
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
