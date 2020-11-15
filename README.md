@@ -33,6 +33,7 @@ Shopping
 * Login should be persistent
 * User should be able to log out
 * User should be able to post book for sale/trade/buy
+* User should be able to delete their own posts
 * User should be able to click on any book listing for more detail
 
 
@@ -44,6 +45,8 @@ Shopping
 * Users should be able to message seller/buyer to initiate sale
 * User should be able to see previous sales/buys they've done
 * User should be able to rate transactions with others users
+* User should be able to post book review
+
 
 ### 2. Screen Archetypes
 
@@ -88,10 +91,47 @@ Shopping
 <img src="wireframe.png">
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+
+Property | Type | Description
+------------ | ------------- | -------------
+objectId | String | Unique identifier
+poster | pointer to user | Book listing author
+image | File | Image of book
+title | String | Title of book
+author | String | Author of book
+genre | String | Genre of book
+ISBN | String | ISBN of book
+synopsis | String | Synopsis of book
+type | String | Type of post (buy/sell/trade)
+dateAdded | DateTime | Date/time book listing was posted
+dateUpdated | DateTime | Date/time book listing was updated
+
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
+#### List of network requests by screen
+   - Login
+      - (Create/POST) Create a User object
+      - (Read/GET) Authenticate User to login
+
+   - Search Screen 
+      - (Read/GET) Query posts to find book posts
+      ```swift
+         let query = PFQuery(className:"Post")
+         query.whereKey("poster", equalTo: currentUser)
+         query.order(byDescending: "dateAdded")
+         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let error = error { 
+               print(error.localizedDescription)
+            } else if let posts = posts {
+               print("Successfully retrieved \(posts.count) posts.")
+           // TODO: Do something with posts...
+            }
+         }
+         ```
+   - Detailed Screen
+      - (Read/GET) Query posts for selected book
+   - Post Book Screen
+      - (Create/POST) Create a new post object
+      - (Delete) Delete a post object
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
