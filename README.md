@@ -134,6 +134,6 @@ updatedAt | Date | Date/time book listing was updated
    - Post Book Screen
       - (Create/POST) Create a new post object
       - (Delete) Delete a post object
--  NYT Book API
-  - Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/{date}/{list}.json (For default results displayed on Search screen)
-  - Search by ISBN: https://api.nytimes.com/svc/books/v3/reviews.json?isbn={isbn} (For Posting Book for sale/trade/buy)
+   - NYT Book API
+      - Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/{date}/{list}.json (For default results displayed on Search screen)
+      - Search by ISBN: https://api.nytimes.com/svc/books/v3/reviews.json?isbn={isbn} (For Posting Book for sale/trade/buy)
