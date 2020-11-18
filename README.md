@@ -96,7 +96,7 @@ Shopping
 Property | Type | Description
 ------------ | ------------- | -------------
 objectId | String | Unique identifier
-poster | pointer to user | Book listing author
+poster | pointer to User | Book listing author
 image | File | Image of book
 title | String | Title of book
 author | String | Author of book
@@ -104,8 +104,8 @@ genre | String | Genre of book
 ISBN | String | ISBN of book
 synopsis | String | Synopsis of book
 type | String | Type of post (buy/sell/trade)
-dateAdded | DateTime | Date/time book listing was posted
-dateUpdated | DateTime | Date/time book listing was updated
+createdAt | Date | Date/time book listing was posted
+updatedAt | Date | Date/time book listing was updated
 
 
 ### Networking
@@ -134,4 +134,6 @@ dateUpdated | DateTime | Date/time book listing was updated
    - Post Book Screen
       - (Create/POST) Create a new post object
       - (Delete) Delete a post object
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+   - NYT Book API
+      - Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/{date}/{list}.json (For default results displayed on Search screen)
+      - Search by ISBN: https://api.nytimes.com/svc/books/v3/reviews.json?isbn={isbn} (For Posting Book for sale/trade/buy)
