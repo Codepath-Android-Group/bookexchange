@@ -26,14 +26,15 @@ Shopping
 
 **Required Must-have Stories**
 
+***Milestone 1***
 - [x] User should be able to register an account
 - [x] User should be able to login
 - [x] Login should be persistent
+- [x] User should be able to log out
 
 <img src="/demo1.gif" alt="Demo image for milestone 1" height="750">
 
 
-- [x] User should be able to log out
 - [ ] User should see top sellers on search screen (by default) before a query is sent
 - [ ] Allow user to search by author, title, genre
 - [ ] User should be able to post book for sale/trade/buy
