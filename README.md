@@ -30,7 +30,7 @@ Shopping
 - [x] User should be able to login
 - [x] Login should be persistent
 
-<img src="/demo1.gif" alt="Demo image for milestone 1" height="250">
+<img src="/demo1.gif" alt="Demo image for milestone 1" height="750">
 
 
 - [x] User should be able to log out
