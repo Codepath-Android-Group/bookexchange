@@ -26,15 +26,15 @@ Shopping
 
 **Required Must-have Stories**
 
-* User should be able to register an account
-* User should be able to login
-* User should see top sellers on search screen (by default) before a query is sent
-* Allow user to search by author, title, genre
-* Login should be persistent
-* User should be able to log out
-* User should be able to post book for sale/trade/buy
-* User should be able to delete their own posts
-* User should be able to click on any book listing for more detail
+[x] User should be able to register an account
+[x] User should be able to login
+[x] Login should be persistent
+[x] User should be able to log out
+[ ] User should see top sellers on search screen (by default) before a query is sent
+[ ] Allow user to search by author, title, genre
+[ ] User should be able to post book for sale/trade/buy
+[ ] User should be able to delete their own posts
+[ ] User should be able to click on any book listing for more detail
 
 
 **Optional Nice-to-have Stories**
