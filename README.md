@@ -30,7 +30,8 @@ Shopping
 - [x] User should be able to login
 - [x] Login should be persistent
 
-![Demo image for milestone 1](demo1.gif =250x)
+![Demo image for milestone 1]
+(/demo1.gif =250x)
 
 - [x] User should be able to log out
 - [ ] User should see top sellers on search screen (by default) before a query is sent
