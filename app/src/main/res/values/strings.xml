@@ -5,4 +5,6 @@
     <string name="author_name">Author Name</string>
     <string name="description_of_book_very_interesting_stuff">Description of book very interesting stuff</string>
     <string name="todo">TODO</string>
+    <string name="don_t_know_what_you_re_looking_for_try_a_new_york_times_best_seller">Don\'t know what you\'re looking for? Try a New York Times Best Seller!</string>
+    <string name="_1">#1</string>
 </resources>

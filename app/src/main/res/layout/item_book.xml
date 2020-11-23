@@ -45,5 +45,14 @@
         android:layout_toEndOf="@+id/ivCover"
         android:text="@string/description_of_book_very_interesting_stuff" />
 
+    <TextView
+        android:id="@+id/tvRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:text="@string/_1"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
 
 </RelativeLayout>

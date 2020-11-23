@@ -16,6 +16,7 @@ public class Book {
     private String author;
     private String isbn; // get primary_isbn13
     private String description;
+    private String rank;
     private String image_url; // need Glide
 
     // empty constructor needed by Parceler library
@@ -27,6 +28,7 @@ public class Book {
         this.isbn = jsonObject.getString("primary_isbn13");
         this.description = jsonObject.getString("description");
         this.image_url = jsonObject.getString("book_image");
+        this.rank = jsonObject.getString("rank");
     }
 
     public static List<Book> fromJsonArray(JSONArray bookJsonArray) throws JSONException {
@@ -58,25 +60,10 @@ public class Book {
         return image_url;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getRank() {
+        return rank;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
 
     @Override
     public String toString() {

@@ -8,10 +8,27 @@
     tools:context=".MainActivity">
 
 
+    <TextView
+        android:id="@+id/tvPrompt"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/don_t_know_what_you_re_looking_for_try_a_new_york_times_best_seller"
+        android:textAllCaps="false"
+        android:textColor="#673AB7"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBooks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/tvPrompt">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

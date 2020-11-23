@@ -62,6 +62,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
         TextView tvTitle;
         TextView tvAuthor;
         TextView tvDescription;
+        TextView tvRank;
         ImageView ivCover;
 
         public ViewHolder(@NonNull View itemView) {
@@ -70,12 +71,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvRank = itemView.findViewById(R.id.tvRank);
             ivCover = itemView.findViewById(R.id.ivCover);
         }
 
         public void bind(Book book) {
             tvTitle.setText(book.getTitle());
             tvAuthor.setText(book.getAuthor());
+            tvRank.setText(book.getRank());
             tvDescription.setText(book.getDescription());
             String imageUrl = book.getImage_url();
             Glide.with(context).load(imageUrl).into(ivCover);
