@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BookExchange</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="author_name">Author Name</string>
+    <string name="description_of_book_very_interesting_stuff">Description of book very interesting stuff</string>
+    <string name="todo">TODO</string>
 </resources>
