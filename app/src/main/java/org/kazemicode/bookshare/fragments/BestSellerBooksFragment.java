@@ -19,6 +19,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.kazemicode.bookshare.BuildConfig;
 import org.kazemicode.bookshare.R;
 import org.kazemicode.bookshare.adapters.BookAdapter;
 import org.kazemicode.bookshare.models.Book;
@@ -36,7 +37,8 @@ import okhttp3.Headers;
 public class BestSellerBooksFragment extends Fragment {
 
     public static final String TAG = "BestSellerBooksFragment";
-    public static final String API_KEY = "3DfFcE09gMXxVkFSusqN3AJ6HVv7W0RI";
+    //TODO: Hide API Key
+    public static final String API_KEY = BuildConfig.NYT_API_KEY;
     public static final String BEST_SELLER_URL = String.format("https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction?isbn=9781524763138&api-key=%s", API_KEY);
     protected List<Book> books;
 

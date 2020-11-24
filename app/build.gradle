@@ -1,10 +1,14 @@
 apply plugin: 'com.android.application'
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
 
     defaultConfig {
+        buildConfigField("String", "NYT_API_KEY", apikeyProperties['NYT_API_KEY'])
         applicationId "org.kazemicode.bookshare"
         minSdkVersion 21
         targetSdkVersion 29
