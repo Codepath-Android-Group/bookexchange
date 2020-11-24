@@ -4,35 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-import java.util.List;
-import java.util.ArrayList;
 import com.parse.ParseUser;
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.kazemicode.bookshare.adapters.BookAdapter;
 import org.kazemicode.bookshare.fragments.BestSellerBooksFragment;
-import org.kazemicode.bookshare.models.Book;
-
-import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
