@@ -35,7 +35,7 @@ Shopping
 <img src="/demo1.gif" alt="Demo image for milestone 1" height="750">
 
 ***Milestone 2***
-- [ ] User should see top sellers on search screen (by default) before a query is sent
+- [x] User should see top sellers on search screen (by default) before a query is sent
 - [ ] Allow user to search by author, title, isbn
 
 ***Milestone 3***
