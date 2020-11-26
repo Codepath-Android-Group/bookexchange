@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/resultsContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <ImageView
@@ -23,7 +22,7 @@
         android:layout_toEndOf="@+id/ivCover"
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="24sp"
-        tools:text="The Book Title" />
+        android:text="@string/the_book_title" />
 
     <TextView
         android:id="@+id/tvAuthor"
@@ -47,13 +46,12 @@
         android:text="@string/description_of_book_very_interesting_stuff" />
 
     <TextView
-        android:id="@+id/tvRank"
+        android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#000000"
-        android:text="#1"
+        android:text="SELLING"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
-
 
 </RelativeLayout>

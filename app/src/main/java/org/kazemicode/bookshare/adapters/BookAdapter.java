@@ -78,6 +78,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
         public void bind(Book book) {
             tvTitle.setText(book.getTitle());
             tvAuthor.setText(book.getAuthor());
+            //Log.i("BookAdapter", book.getRank());
             tvRank.setText(book.getRank());
             tvDescription.setText(book.getDescription());
             String imageUrl = book.getImage_url();
