@@ -7,28 +7,68 @@
     android:layout_height="match_parent"
     tools:context=".fragments.BestSellerBooksFragment">
 
+
+
+    <TableRow
+        android:id="@+id/trPostInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ems="10"
+            android:hint="@string/search_by_isbn"
+            android:importantForAutofill="no"
+            android:inputType="none|textNoSuggestions"
+            android:textColorHint="#BBA7DE" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:background="#B7EFBE"
+            android:textColor="#673AB7"
+            android:textStyle="bold"
+            android:text="@string/search" />
+    </TableRow>
+
     <TextView
         android:id="@+id/tvPrompt"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/don_t_know_what_you_re_looking_for_try_a_new_york_times_best_seller"
         android:textAllCaps="false"
         android:textColor="#673AB7"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/trPostInfo"
+        android:textStyle="bold"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBooks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/tvPrompt">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
+
 
 </RelativeLayout>

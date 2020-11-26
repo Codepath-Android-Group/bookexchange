@@ -9,11 +9,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import org.kazemicode.bookshare.adapters.PostAdapter;
 import org.kazemicode.bookshare.fragments.BestSellerBooksFragment;
+import org.kazemicode.bookshare.models.Post;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content, new BestSellerBooksFragment(), null).commit();
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

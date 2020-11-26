@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ivPCover"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/todo" />
+
+    <TextView
+        android:id="@+id/tvPTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_toEndOf="@+id/ivPCover"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textSize="24sp"
+        android:text="@string/the_book_title" />
+
+    <TextView
+        android:id="@+id/tvPAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPTitle"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivPCover"
+        android:text="@string/author_name" />
+
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#4CAF50"
+        android:text="@string/selling"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <TableRow
+        android:id="@+id/trPostInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPAuthor"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/ivPCover"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp">
+
+
+        <TextView
+            android:id="@+id/tvPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPAuthor"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@+id/PivCover"
+            android:text="Posted by username"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDateAdded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPAuthor"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@+id/PivCover"
+            android:text="on 12/20" />
+
+    </TableRow>
+
+</RelativeLayout>
