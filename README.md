@@ -38,6 +38,8 @@ Shopping
 - [x] User should see top sellers on search screen (by default) before a query is sent
 - [x] Allow user to search by isbn
 
+<img src="/demo2.gif" alt="Demo image for milestone 1" height="750">
+
 ***Milestone 3***
 - [ ] User should be able to post book for sale/trade/buy
 - [ ] User should be able to delete their own posts
