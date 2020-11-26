@@ -36,7 +36,7 @@ Shopping
 
 ***Milestone 2***
 - [x] User should see top sellers on search screen (by default) before a query is sent
-- [ ] Allow user to search by author, title, isbn
+- [x] Allow user to search by author, title, isbn
 
 ***Milestone 3***
 - [ ] User should be able to post book for sale/trade/buy
