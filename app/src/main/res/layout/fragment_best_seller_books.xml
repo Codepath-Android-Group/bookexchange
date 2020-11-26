@@ -10,7 +10,7 @@
 
 
     <TableRow
-        android:id="@+id/trSearch"
+        android:id="@+id/trPostInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -54,7 +54,7 @@
         android:textAllCaps="false"
         android:textColor="#673AB7"
         android:textSize="18sp"
-        android:layout_below="@+id/trSearch"
+        android:layout_below="@+id/trPostInfo"
         android:textStyle="bold"
         />
 

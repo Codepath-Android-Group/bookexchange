@@ -10,4 +10,5 @@
     <string name="search_by_isbn">Search by ISBN</string>
     <string name="search">Search</string>
     <string name="the_book_title">The Book Title</string>
+    <string name="selling">SELLING</string>
 </resources>

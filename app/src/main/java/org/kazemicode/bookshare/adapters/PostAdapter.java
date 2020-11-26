@@ -1,5 +1,7 @@
 package org.kazemicode.bookshare.adapters;
 import android.content.Context;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +9,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 
@@ -18,6 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private Context context;
     private List<Post> posts;
+    private static String TAG = "PostAdapter";
 
     public PostAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -27,7 +39,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_book, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,52 +55,73 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     }
 
-    /* Within the RecyclerView.Adapter class */
-
-    // Clean all elements of the recycler
-    public void clear() {
-        posts.clear();
-        notifyDataSetChanged();
-    }
-
-    // Add a list of items -- change to type used
-    public void addAll(List<Post> list) {
-        posts.addAll(list);
-        notifyDataSetChanged();
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder {
         // Instance fields
 
         RelativeLayout container;
         TextView tvTitle;
         TextView tvAuthor;
-        TextView tvDescription;
-        TextView tvISBN;
+        TextView tvType;
+        TextView tvDateAdded;
         ImageView ivCover;
         TextView tvCustomDescription;
-        TextView poster;
+        TextView tvPoster;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            container = itemView.findViewById(R.id.resultsContainer);
-           // tvTitle = itemView.findViewById(R.id.tvTitle);
-           // tvAuthor = itemView.findViewById(R.id.tvAuthor);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-           // tvRank = itemView.findViewById(R.id.tvRank);
-           // ivCover = itemView.findViewById(R.id.ivCover);
+            container = itemView.findViewById(R.id.container);
+            tvTitle = itemView.findViewById(R.id.tvPTitle);
+            tvAuthor = itemView.findViewById(R.id.tvPAuthor);
+            tvType = itemView.findViewById(R.id.tvType);
+            tvDateAdded = itemView.findViewById(R.id.tvDateAdded);
+            ivCover = itemView.findViewById(R.id.ivPCover);
+            tvPoster = itemView.findViewById(R.id.tvPoster);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void bind(Post post) {
             //bind post data to element
-            tvDescription.setText(post.getDescription());
-            //tvISBN.setText(post.getPoster().getUsername());
-            //ParseFile image = post.getImage();
-//            if(image != null){
-//                Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
-//            }
+            tvTitle.setText(post.getTitle());
+            tvAuthor.setText(post.getAuthor());
+            Log.i("PostAdapter", post.getPoster().toString());
+            tvType.setText(post.getType());
+            String daysSincePosted = calculateDays(post.getCreatedAt());
+            tvDateAdded.setText(daysSincePosted);
+            String name = getPosterName(post.getPoster());
+            tvPoster.setText(name);
+            if(!post.getImgUrl().isEmpty()){
+                Glide.with(context).load(post.getImgUrl()).into(ivCover);
+            }
 
+        }
+
+        public String getPosterName(ParseUser user){
+            String name = "Posted by ";
+            try {
+                name += user.fetchIfNeeded().getUsername();
+            } catch (ParseException e) {
+                Log.v(TAG, e.toString());
+                e.printStackTrace();
+            }
+
+            return name;
+
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public String calculateDays(Date posted) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            LocalDate.now();
+            long diffInMillis = Math.abs(posted.getTime() - new Date().getTime());
+            long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+
+            if(diff > 0) {
+                return diff + " days ago";
+            }
+            else {
+                return "today";
+            }
 
         }
     }

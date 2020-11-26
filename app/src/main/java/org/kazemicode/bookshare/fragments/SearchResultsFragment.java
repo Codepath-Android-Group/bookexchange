@@ -64,7 +64,6 @@ public class SearchResultsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String isbn = getArguments().getString("search");
-        searchByISBN(isbn);
 
         // initialize books ArrayList so it can get Posts
         posts = new ArrayList<>();
@@ -76,10 +75,10 @@ public class SearchResultsFragment extends Fragment {
         rvPosts.setAdapter(adapter);
         // Set a Layout Manager on the Recycler View
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
+        // query
+        searchByISBN(isbn);
     }
+
     private void searchByISBN(String isbn) {
         int LIMIT = 20;
         //specify which class to query
@@ -89,18 +88,18 @@ public class SearchResultsFragment extends Fragment {
         query.addDescendingOrder(Post.KEY_CREATED_AT);
         // Retrieve all posts
         query.findInBackground(new FindCallback<Post>() {
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<Post> resultPosts, ParseException e) {
                 if (e == null) {
-                    for(Post post : posts) {
+                    for(Post post : resultPosts) {
                         Log.i(TAG, "Post: " + post.getDescription());
                     }
                 } else {
                     // something went wrong
                     Log.e(TAG, "Issue with getting posts", e);
                 }
-                adapter.clear();
-                posts.addAll(posts);
-                // to do pass posts to SearchResultsFragment as a bundle
+
+                posts.addAll(resultPosts);
+                adapter.notifyDataSetChanged();
 
             }
         });

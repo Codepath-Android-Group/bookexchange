@@ -23,7 +23,7 @@
         android:layout_toEndOf="@+id/ivCover"
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="24sp"
-        tools:text="The Book Title" />
+        android:text="The Book Title" />
 
     <TextView
         android:id="@+id/tvAuthor"
