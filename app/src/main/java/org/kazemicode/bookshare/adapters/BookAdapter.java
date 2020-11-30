@@ -79,7 +79,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
             tvTitle.setText(book.getTitle());
             tvAuthor.setText(book.getAuthor());
             //Log.i("BookAdapter", book.getRank());
-            tvRank.setText(book.getRank());
+            tvRank.setText("# " + book.getRank());
             tvDescription.setText(book.getDescription());
             String imageUrl = book.getImage_url();
             Glide.with(context).load(imageUrl).into(ivCover);
