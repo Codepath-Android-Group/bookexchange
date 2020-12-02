@@ -83,6 +83,7 @@ public class SearchResultsFragment extends Fragment {
         int LIMIT = 20;
         //specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.whereEqualTo("isbn", isbn);
         query.setLimit(LIMIT);
         // order by most recent
         query.addDescendingOrder(Post.KEY_CREATED_AT);

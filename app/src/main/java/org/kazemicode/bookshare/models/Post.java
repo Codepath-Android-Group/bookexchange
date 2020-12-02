@@ -55,7 +55,7 @@ public class Post extends ParseObject {
     }
 
     public String getType() {
-        return getString(KEY_TYPE);
+        return getString(KEY_TYPE).toUpperCase();
     }
 
     public void setPoster(ParseUser poster) {
