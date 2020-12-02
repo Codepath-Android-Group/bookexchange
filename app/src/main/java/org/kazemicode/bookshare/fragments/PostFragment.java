@@ -118,7 +118,7 @@ public class PostFragment extends Fragment {
         post.setImgUrl(imgUrl);
         post.setPoster(user);
         post.setType(type);
-        https://s1.nyt.com/du/books/images/9780765326386.jpg
+
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

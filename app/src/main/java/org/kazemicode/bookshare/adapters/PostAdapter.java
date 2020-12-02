@@ -45,9 +45,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        Log.i(TAG, String.valueOf(posts.size()));
         return posts.size();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = posts.get(position);
@@ -84,7 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             //bind post data to element
             tvTitle.setText(post.getTitle());
             tvAuthor.setText(post.getAuthor());
-            Log.i("PostAdapter", post.getPoster().toString());
+            // Log.i("PostAdapter", post.getPoster().toString());
             tvType.setText(post.getType());
             String daysSincePosted = calculateDays(post.getCreatedAt());
             tvDateAdded.setText(daysSincePosted);

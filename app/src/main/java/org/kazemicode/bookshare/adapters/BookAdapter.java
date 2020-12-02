@@ -3,6 +3,7 @@ package org.kazemicode.bookshare.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +24,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import org.kazemicode.bookshare.R;
+import org.kazemicode.bookshare.fragments.SearchResultsFragment;
 import org.kazemicode.bookshare.models.Book;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
@@ -78,25 +84,30 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
         public void bind(Book book) {
             tvTitle.setText(book.getTitle());
             tvAuthor.setText(book.getAuthor());
-            //Log.i("BookAdapter", book.getRank());
             tvRank.setText("# " + book.getRank());
             tvDescription.setText(book.getDescription());
             String imageUrl = book.getImage_url();
             Glide.with(context).load(imageUrl).into(ivCover);
+            final String isbn = book.getIsbn();
 
 
             // TODO: Search for book via ISBN in Backend upon tap
-//            // 1. Register click listener on whole row
-//            container.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    // 2.  Navigate to a new activity on tap
-//                    Intent i = new Intent(context, DetailActivity.class);
-//                    i.putExtra("book", Parcels.wrap(book));
-//                    context.startActivity(i);
-//
-//                }
-//            });
+            // 1. Register click listener on whole row
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Use Fragments
+                    Bundle bundle = new Bundle();
+                    bundle.putString("search", isbn);
+                    Fragment fragment = new SearchResultsFragment();
+                    fragment.setArguments(bundle);
+                    FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.content, fragment, null).commit();
+
+                }
+            });
         }
     }
 }
