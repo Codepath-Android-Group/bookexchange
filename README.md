@@ -41,7 +41,7 @@ Shopping
 <img src="/demo2.gif" alt="Demo image for milestone 1" height="750">
 
 ***Milestone 3***
-- [ ] User should be able to post book for sale/trade/buy
+- [x] User should be able to post book for sale/trade/buy
 - [ ] User should be able to delete their own posts
 
 ***Milestone 4***
