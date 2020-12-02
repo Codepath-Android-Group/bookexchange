@@ -87,7 +87,7 @@ public class BestSellerBooksFragment extends Fragment {
             public void onClick(View view) {
                 Log.i(TAG, "onClick search button");
                 String isbn = etSearch.getText().toString();
-
+                etSearch.setText("");
                 // Use Fragments
                 Bundle bundle = new Bundle();
                 bundle.putString("search", isbn);

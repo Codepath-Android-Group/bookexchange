@@ -6,20 +6,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kazemicode.bookshare.BuildConfig;
 import org.kazemicode.bookshare.R;
 import org.kazemicode.bookshare.models.Post;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,9 +46,12 @@ public class PostFragment extends Fragment {
     private EditText etTitle;
     private EditText etAuthor;
     private EditText etImgURL;
-    private EditText etType;
     private EditText etCustom;
-    private Button btnSubmit;
+    private Button btnPost;
+    private Button btnLoad;
+    private RadioGroup radioType;
+    private String type = "";
+    private static HttpURLConnection con;
 
     public static final String TAG = "PostFragment";
 
@@ -55,59 +73,154 @@ public class PostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post, container, false);
+        final View view = inflater.inflate(R.layout.fragment_post, container, false);
+
+        radioType = (RadioGroup) view.findViewById(R.id.etType);
+        radioType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                // Check which radio button was clicked
+                switch(i) {
+                    case R.id.radioBuying:
+                        type = "BUYING";
+                        break;
+                    case R.id.radioSelling:
+                        type = "SELLING";
+                        break;
+                    case R.id.radioTrading:
+                        type = "TRADING";
+                        break;
+                }
+
+            }
+        });
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+
+        }
+
         etISBN = view.findViewById(R.id.etISBN);
         etAuthor = view.findViewById(R.id.etAuthor);
         etTitle = view.findViewById(R.id.etTitle);
         etImgURL = view.findViewById(R.id.etImgURL);
-        etType = view.findViewById(R.id.etType);
         etCustom = view.findViewById(R.id.etCustom);
-        btnSubmit = view.findViewById(R.id.btnPost);
+        btnPost = view.findViewById(R.id.btnPost);
+        btnLoad = view.findViewById(R.id.btnLoad);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        btnLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String isbn = etISBN.getText().toString();
+                try {
+                    autoFillFromISBNDB(isbn);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String isbn = etISBN.getText().toString();
                 String author = etAuthor.getText().toString();
                 String title = etTitle.getText().toString();
                 String imgUrl = etImgURL.getText().toString();
-                String type = etType.getText().toString();
                 String custom = etCustom.getText().toString();
 
-                if(isbn.isEmpty()){
+                if (isbn.isEmpty()) {
                     Toast.makeText(getContext(), "isbn is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(author.isEmpty()){
+                if (author.isEmpty()) {
                     Toast.makeText(getContext(), "author is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(title.isEmpty()){
+                if (title.isEmpty()) {
                     Toast.makeText(getContext(), "title is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(type.isEmpty()){
+                if (type.isEmpty()) {
                     Toast.makeText(getContext(), "type is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(custom.isEmpty()){
+                if (custom.isEmpty()) {
                     Toast.makeText(getContext(), "description is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(isbn, author, title, imgUrl,type, custom, currentUser);
+                savePost(isbn, author, title, imgUrl, type, custom, currentUser);
 
 
             }
         });
 
     }
+
+
+
+    private void autoFillFromISBNDB(String isbn) throws MalformedURLException,
+            ProtocolException, IOException {
+        String url = "https://api2.isbndb.com/book/";
+
+        try {
+
+            URL myurl = new URL(url + isbn);
+            con = (HttpURLConnection) myurl.openConnection();
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Authorization", "44847_f2f472c204b4474b17a0e746ecff4a7f");
+            con.setRequestMethod("GET");
+
+            StringBuilder content;
+
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()))) {
+
+                String line;
+                content = new StringBuilder();
+
+                while ((line = in.readLine()) != null) {
+                    content.append(line);
+                    content.append(System.lineSeparator());
+                }
+            }
+
+            String c = content.toString();
+            System.out.println(c);
+
+            JSONObject reader = new JSONObject(c);
+            JSONObject book = reader.getJSONObject("book");
+            etTitle.setText(book.getString("title"));
+            etImgURL.setText(book.getString("image"));
+            JSONArray author = book.getJSONArray("authors");
+            etAuthor.setText(author.get(0).toString());
+
+
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "Sorry, we couldn't find that book to autoload info", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            } finally {
+
+                 con.disconnect();
+        }
+    }
+
+
 
     private void savePost(String isbn, String author, String title, String imgUrl, String type, String custom, ParseUser user) {
         Post post = new Post();
@@ -135,7 +248,6 @@ public class PostFragment extends Fragment {
                     etTitle.setText("");
                     etAuthor.setText("");
                     etImgURL.setText("");
-                    etType.setText("");
                     etISBN.setText("");
 
 
