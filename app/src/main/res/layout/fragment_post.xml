@@ -8,6 +8,25 @@
     tools:context=".fragments.PostFragment">
 
 
+    <TextView
+        android:id="@+id/tvExp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Enter the ISBN number of the book you'd like to post about and we'll fill in the details below!" />
+
+    <TableRow
+        android:id="@+id/trISBN"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/tvExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
     <EditText
         android:id="@+id/etISBN"
         android:layout_width="wrap_content"
@@ -16,58 +35,106 @@
         android:hint="Enter ISBN"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/etTitle"
+    <Button
+        android:id="@+id/btnLoad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etISBN"
+        android:layout_weight="1"
+        android:background="#B7EFBE"
+        android:text="Submit"
+        android:textColor="#673AB7"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:layout_margin="10dp"
+        />
+
+
+    </TableRow>
+
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trISBN"
         android:ems="10"
         android:hint="Book title"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_margin="10dp"/>
 
     <EditText
         android:id="@+id/etAuthor"
-        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etTitle"
         android:ems="10"
         android:hint="Author name"
         android:inputType="textPersonName" />
-    <EditText
-    android:id="@+id/etType"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/etAuthor"
-    android:ems="10"
-    android:hint="Buying, Selling, or Trading?"
-    android:inputType="textPersonName"/>
 
-    <EditText
-        android:id="@+id/etCustom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etType"
-        android:ems="10"
-        android:hint="Describe condition"
-        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etImgURL"
-        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCustom"
+        android:layout_below="@+id/etAuthor"
         android:ems="10"
         android:hint="Book cover URL"
         android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btnPost"
-        android:layout_width="wrap_content"
+
+    <RadioGroup
+        android:id="@+id/etType"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etImgURL"
+        android:text="Type of Post"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioSelling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selling" />
+
+        <RadioButton
+            android:id="@+id/radioBuying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buying" />
+
+        <RadioButton
+            android:id="@+id/radioTrading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trading" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/etCustom"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etType"
+        android:ems="10"
+        android:hint="Describe condition"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"/>
+
+
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCustom"
         android:textColor="#673AB7"
         android:background="#B7EFBE"
         android:textStyle="bold"
         android:text="Post" />
+
+
 
 </RelativeLayout>

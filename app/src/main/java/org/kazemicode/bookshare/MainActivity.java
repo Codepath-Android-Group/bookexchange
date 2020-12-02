@@ -31,6 +31,7 @@ import org.kazemicode.bookshare.models.Post;
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     private BottomNavigationView bottomNavigationView;
+    private Fragment fragment;
 
 
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
+
                 switch (item.getItemId()) {
                     case R.id.actionPost:
                         fragment = new PostFragment();
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         });
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.actionHome);
+
+
 
     }
 
