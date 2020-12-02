@@ -9,6 +9,7 @@ android {
 
     defaultConfig {
         buildConfigField("String", "NYT_API_KEY", apikeyProperties['NYT_API_KEY'])
+        buildConfigField("String", "ISBN_API_KEY", apikeyProperties['ISBN_API_KEY'])
         applicationId "org.kazemicode.bookshare"
         minSdkVersion 21
         targetSdkVersion 29

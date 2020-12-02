@@ -109,8 +109,6 @@ public class PostFragment extends Fragment {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-            //your codes here
-
         }
 
         etISBN = view.findViewById(R.id.etISBN);
@@ -183,7 +181,7 @@ public class PostFragment extends Fragment {
             URL myurl = new URL(url + isbn);
             con = (HttpURLConnection) myurl.openConnection();
             con.setRequestProperty("Content-Type", "application/json");
-            con.setRequestProperty("Authorization", "44847_f2f472c204b4474b17a0e746ecff4a7f");
+            con.setRequestProperty("Authorization", BuildConfig.ISBN_API_KEY);
             con.setRequestMethod("GET");
 
             StringBuilder content;
