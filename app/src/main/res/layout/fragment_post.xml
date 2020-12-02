@@ -1,15 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/post"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.PostFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/etISBN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter ISBN"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etISBN"
+        android:ems="10"
+        android:hint="Book title"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etTitle"
+        android:ems="10"
+        android:hint="Author name"
+        android:inputType="textPersonName" />
+    <EditText
+    android:id="@+id/etType"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/etAuthor"
+    android:ems="10"
+    android:hint="Buying, Selling, or Trading?"
+    android:inputType="textPersonName"/>
+
+    <EditText
+        android:id="@+id/etCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etType"
+        android:ems="10"
+        android:hint="Describe condition"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etImgURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCustom"
+        android:ems="10"
+        android:hint="Book cover URL"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etImgURL"
+        android:text="Post" />
+
+</RelativeLayout>
