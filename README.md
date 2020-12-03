@@ -158,7 +158,31 @@ updatedAt | Date | Date/time book listing was updated
               }
           });
       ```
-      - NYT Book API: Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json (For suggested books to search on Search screen)      
+      - NYT Book API: Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json (For suggested books to search on Search screen)    
+      ```java
+          // Create our Async client so we can request from our API endpoint
+          final AsyncHttpClient client = new AsyncHttpClient();
+          // Get Books
+          client.get(BEST_SELLER_URL, new JsonHttpResponseHandler() {
+              @Override
+              public void onSuccess(int statusCode, Headers headers, JSON json) {
+                  Log.d(TAG, "onSuccess");
+                  JSONObject jsonObject = json.jsonObject;
+                  try {
+                      JSONObject results = jsonObject.getJSONObject("results");
+                      JSONArray bookResults = results.getJSONArray("books");
+                      Log.i(TAG, "Results: " + bookResults.toString());
+                      books.addAll(Book.fromJsonArray(bookResults));
+                      // Let adapter know when books updates to re-render
+                      bookAdapter.notifyDataSetChanged();
+
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+                  Log.i(TAG, "Books: " + books);
+              }
+     ```
+
    - Detailed Screen
       - (Read/GET) Query Posts for selected book (by isbn)
    - Post Book Screen
@@ -241,4 +265,6 @@ updatedAt | Date | Date/time book listing was updated
                          con.disconnect();
                 }
             }
+            
+        ```
 
