@@ -48,7 +48,9 @@ Shopping
 <img src="/demo3.gif" alt="Demo image for milestone 3" height="750">
 
 ***Milestone 4***
-- [ ] User should be able to click on any book listing for more detail
+- [x] User should be able to click on any book listing for more detail
+
+<img src="/demo4.gif" alt="Demo image for milestone 3" height="750">
 
 
 **Optional Nice-to-have Stories**
