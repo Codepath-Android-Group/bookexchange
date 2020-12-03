@@ -132,26 +132,38 @@ updatedAt | Date | Date/time book listing was updated
 
    - Search Screen 
       - (Read/GET) Query posts to find book posts
-      ```swift
-         let query = PFQuery(className:"Post")
-         query.whereKey("poster", equalTo: currentUser)
-         query.order(byDescending: "dateAdded")
-         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let error = error { 
-               print(error.localizedDescription)
-            } else if let posts = posts {
-               print("Successfully retrieved \(posts.count) posts.")
-           // TODO: Do something with posts...
-            }
-         }
-         ```
-   - NYT Book API
-      - Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json (For suggested books to search on Search screen)      
+      ```java
+          int LIMIT = 20;
+          //specify which class to query
+          ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+          query.whereEqualTo("isbn", isbn);
+          query.setLimit(LIMIT);
+          // order by most recent
+          query.addDescendingOrder(Post.KEY_CREATED_AT);
+          // Retrieve all posts
+          query.findInBackground(new FindCallback<Post>() {
+              public void done(List<Post> resultPosts, ParseException e) {
+                  if (e == null) {
+                      for(Post post : resultPosts) {
+                          Log.i(TAG, "Post: " + post.getDescription());
+                      }
+                  } else {
+                      // something went wrong
+                      Log.e(TAG, "Issue with getting posts", e);
+                  }
+
+                  posts.addAll(resultPosts);
+                  adapter.notifyDataSetChanged();
+
+              }
+          });
+      ```
+      - NYT Book API: Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json (For suggested books to search on Search screen)      
    - Detailed Screen
       - (Read/GET) Query Posts for selected book (by isbn)
    - Post Book Screen
       - (Create/POST) Create a new Post object
-      ```swift
+      ```java
           Post post = new Post();
           post.setCustomDescription(custom);
           post.setTitle(title);
