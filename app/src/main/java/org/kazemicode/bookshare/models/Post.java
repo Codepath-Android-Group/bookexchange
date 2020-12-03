@@ -24,8 +24,6 @@ public class Post extends ParseObject {
     public Post() {
     }
 
-
-
     public ParseUser getPoster() {
         return getParseUser(KEY_POSTER );
     }

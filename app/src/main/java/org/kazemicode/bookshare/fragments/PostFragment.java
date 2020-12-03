@@ -51,6 +51,7 @@ public class PostFragment extends Fragment {
     private Button btnLoad;
     private RadioGroup radioType;
     private String type = "";
+    private String description = "";
     private static HttpURLConnection con;
 
     public static final String TAG = "PostFragment";
@@ -207,7 +208,7 @@ public class PostFragment extends Fragment {
             etImgURL.setText(book.getString("image"));
             JSONArray author = book.getJSONArray("authors");
             etAuthor.setText(author.get(0).toString());
-
+            description = book.getString("synopsys");
 
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "Sorry, we couldn't find that book to autoload info", Toast.LENGTH_SHORT).show();
@@ -229,6 +230,7 @@ public class PostFragment extends Fragment {
         post.setImgUrl(imgUrl);
         post.setPoster(user);
         post.setType(type);
+        post.setDescription(description);
 
         post.saveInBackground(new SaveCallback() {
             @Override

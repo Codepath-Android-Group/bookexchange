@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DetailedFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/ivCover"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@string/todo"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_toRightOf="@id/ivCover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#4CAF50"
+            android:text="@string/selling"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <TableRow
+            android:id="@+id/trPostInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvType"
+            android:layout_toRightOf="@id/ivCover"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp">
+
+
+            <TextView
+                android:id="@+id/tvPoster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:text="Posted by username"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDateAdded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="on date"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="9dp"
+                />
+
+        </TableRow>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_below="@+id/tvISBN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="24sp"
+            android:text="@string/the_book_title" />
+
+        <TextView
+            android:id="@+id/tvISBN"
+            android:layout_below="@+id/ivCover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="10sp"
+            android:text="isbn" />
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/author_name"
+            android:layout_below="@+id/tvTitle"/>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Summary of book"
+            android:layout_below="@+id/tvAuthor"/>
+
+        <TextView
+            android:id="@+id/tvCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Custom Details"
+            android:layout_toRightOf="@id/ivCover"
+            android:layout_below="@+id/trPostInfo"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>
