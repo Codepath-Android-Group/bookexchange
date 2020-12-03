@@ -196,3 +196,49 @@ updatedAt | Date | Date/time book listing was updated
               }
       ```
       - [isbnDB API](https://isbndb.com/apidocs/v2): Search by ISBN: https://api2.isbndb.com/book/{isbn} (to autofill book details based on ISBN for user posts)
+          ```java
+             private void autoFillFromISBNDB(String isbn) throws MalformedURLException, ProtocolException, IOException {
+                String url = "https://api2.isbndb.com/book/";
+
+                try {
+
+                    URL myurl = new URL(url + isbn);
+                    con = (HttpURLConnection) myurl.openConnection();
+                    con.setRequestProperty("Content-Type", "application/json");
+                    con.setRequestProperty("Authorization", BuildConfig.ISBN_API_KEY);
+                    con.setRequestMethod("GET");
+
+                    StringBuilder content;
+
+                    try (BufferedReader in = new BufferedReader(
+                            new InputStreamReader(con.getInputStream()))) {
+
+                        String line;
+                        content = new StringBuilder();
+
+                        while ((line = in.readLine()) != null) {
+                            content.append(line);
+                            content.append(System.lineSeparator());
+                        }
+                    }
+
+                    String c = content.toString();
+                    System.out.println(c);
+
+                    JSONObject reader = new JSONObject(c);
+                    JSONObject book = reader.getJSONObject("book");
+                    etTitle.setText(book.getString("title"));
+                    etImgURL.setText(book.getString("image"));
+                    JSONArray author = book.getJSONArray("authors");
+                    etAuthor.setText(author.get(0).toString());
+
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getContext(), "Sorry, we couldn't find that book to autoload info", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    } finally {
+
+                         con.disconnect();
+                }
+            }
+
