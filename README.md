@@ -182,4 +182,5 @@ updatedAt | Date | Date/time book listing was updated
 
                   }
               }
+      ```
       - [isbnDB API](https://isbndb.com/apidocs/v2): Search by ISBN: https://api2.isbndb.com/book/{isbn} (to autofill book details based on ISBN for user posts)
