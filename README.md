@@ -1,4 +1,4 @@
-# BookExchange
+# Book Exchange
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -36,13 +36,14 @@ Shopping
 
 ***Milestone 2***
 - [x] User should see top sellers on search screen (by default) before a query is sent
+- [x] User should be able to click on Best Seller images to search for those books
 - [x] Allow user to search by isbn
 
 <img src="/demo2.gif" alt="Demo image for milestone 2" height="750">
 
 ***Milestone 3***
 - [x] User should be able to post book for sale/trade/buy
-- [ ] User should be able to delete their own posts
+- [x] User should be able to autofill details for their book based on ISBN (with help of isbnDB API) to mitigate user input error
 
 <img src="/demo3.gif" alt="Demo image for milestone 3" height="750">
 
@@ -53,10 +54,11 @@ Shopping
 **Optional Nice-to-have Stories**
 
 * Filter results by buy/sell/trade
-* Integrate with NYTimes book API (or similar) to mitigate user error
 * Compare against store listing price
 * Users should be able to message seller/buyer to initiate sale
-* User should be able to see previous sales/buys they've done
+* Users should be able to see their current posts
+* User should be able to delete their own posts
+* User should be able to see previous sales/buys they've COMPLETED
 * User should be able to rate transactions with others users
 * User should be able to post book review
 * User should be able to search by author/title
@@ -111,12 +113,12 @@ Property | Type | Description
 ------------ | ------------- | -------------
 objectId | String | Unique identifier
 poster | pointer to User | Book listing author
-image | File | Image of book
+image | String | URL of book cover
 title | String | Title of book
 author | String | Author of book
-genre | String | Genre of book
-ISBN | String | ISBN of book
-synopsis | String | Synopsis of book
+isbn | String | ISBN of book
+details | String | Synopsis of book
+cutom_details | String | User's description of the condition of the book they want to buy/sell/trade
 type | String | Type of post (buy/sell/trade)
 createdAt | Date | Date/time book listing was posted
 updatedAt | Date | Date/time book listing was updated
@@ -130,24 +132,139 @@ updatedAt | Date | Date/time book listing was updated
 
    - Search Screen 
       - (Read/GET) Query posts to find book posts
-      ```swift
-         let query = PFQuery(className:"Post")
-         query.whereKey("poster", equalTo: currentUser)
-         query.order(byDescending: "dateAdded")
-         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let error = error { 
-               print(error.localizedDescription)
-            } else if let posts = posts {
-               print("Successfully retrieved \(posts.count) posts.")
-           // TODO: Do something with posts...
-            }
-         }
-         ```
+      ```java
+          int LIMIT = 20;
+          //specify which class to query
+          ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+          query.whereEqualTo("isbn", isbn);
+          query.setLimit(LIMIT);
+          // order by most recent
+          query.addDescendingOrder(Post.KEY_CREATED_AT);
+          // Retrieve all posts
+          query.findInBackground(new FindCallback<Post>() {
+              public void done(List<Post> resultPosts, ParseException e) {
+                  if (e == null) {
+                      for(Post post : resultPosts) {
+                          Log.i(TAG, "Post: " + post.getDescription());
+                      }
+                  } else {
+                      // something went wrong
+                      Log.e(TAG, "Issue with getting posts", e);
+                  }
+
+                  posts.addAll(resultPosts);
+                  adapter.notifyDataSetChanged();
+
+              }
+          });
+      ```
+      - NYT Book API: Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/current/combined-print-and-e-book-fiction.json (For suggested books to search on Search screen)    
+      ```java
+          // Create our Async client so we can request from our API endpoint
+          final AsyncHttpClient client = new AsyncHttpClient();
+          // Get Books
+          client.get(BEST_SELLER_URL, new JsonHttpResponseHandler() {
+              @Override
+              public void onSuccess(int statusCode, Headers headers, JSON json) {
+                  Log.d(TAG, "onSuccess");
+                  JSONObject jsonObject = json.jsonObject;
+                  try {
+                      JSONObject results = jsonObject.getJSONObject("results");
+                      JSONArray bookResults = results.getJSONArray("books");
+                      Log.i(TAG, "Results: " + bookResults.toString());
+                      books.addAll(Book.fromJsonArray(bookResults));
+                      // Let adapter know when books updates to re-render
+                      bookAdapter.notifyDataSetChanged();
+
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+                  Log.i(TAG, "Books: " + books);
+              }
+     ```
+
    - Detailed Screen
-      - (Read/GET) Query posts for selected book
+      - (Read/GET) Query Posts for selected book (by isbn)
    - Post Book Screen
-      - (Create/POST) Create a new post object
-      - (Delete) Delete a post object
-   - NYT Book API
-      - Current Best Sellers: https://api.nytimes.com/svc/books/v3/lists/{date}/{list}.json (For default results displayed on Search screen)
-      - Search by ISBN: https://api.nytimes.com/svc/books/v3/reviews.json?isbn={isbn} (For Posting Book for sale/trade/buy)
+      - (Create/POST) Create a new Post object
+      ```java
+          Post post = new Post();
+          post.setCustomDescription(custom);
+          post.setTitle(title);
+          post.setISBN(isbn);
+          post.setAuthor(author);
+          post.setImgUrl(imgUrl);
+          post.setPoster(user);
+          post.setType(type);
+
+          post.saveInBackground(new SaveCallback() {
+              @Override
+              public void done(ParseException e) {
+                  if(e != null){
+                      // there's a problem
+                      Log.e(TAG, "Problem saving post", e);
+                      Toast.makeText(getContext(), "Problem saving post", Toast.LENGTH_SHORT).show();
+
+                  }
+                  else {
+
+                      Log.i(TAG, "Post saved");
+                      etCustom.setText("");
+                      etTitle.setText("");
+                      etAuthor.setText("");
+                      etImgURL.setText("");
+                      etISBN.setText("");
+
+
+                  }
+              }
+      ```
+      - [isbnDB API](https://isbndb.com/apidocs/v2): Search by ISBN: https://api2.isbndb.com/book/{isbn} (to autofill book details based on ISBN for user posts)
+          ```java
+             private void autoFillFromISBNDB(String isbn) throws MalformedURLException, ProtocolException, IOException {
+                String url = "https://api2.isbndb.com/book/";
+
+                try {
+
+                    URL myurl = new URL(url + isbn);
+                    con = (HttpURLConnection) myurl.openConnection();
+                    con.setRequestProperty("Content-Type", "application/json");
+                    con.setRequestProperty("Authorization", BuildConfig.ISBN_API_KEY);
+                    con.setRequestMethod("GET");
+
+                    StringBuilder content;
+
+                    try (BufferedReader in = new BufferedReader(
+                            new InputStreamReader(con.getInputStream()))) {
+
+                        String line;
+                        content = new StringBuilder();
+
+                        while ((line = in.readLine()) != null) {
+                            content.append(line);
+                            content.append(System.lineSeparator());
+                        }
+                    }
+
+                    String c = content.toString();
+                    System.out.println(c);
+
+                    JSONObject reader = new JSONObject(c);
+                    JSONObject book = reader.getJSONObject("book");
+                    etTitle.setText(book.getString("title"));
+                    etImgURL.setText(book.getString("image"));
+                    JSONArray author = book.getJSONArray("authors");
+                    etAuthor.setText(author.get(0).toString());
+
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getContext(), "Sorry, we couldn't find that book to autoload info", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    } finally {
+
+                         con.disconnect();
+                }
+            }
+            
+        ```
+
